@@ -69,7 +69,7 @@ pipeline {
                         git add deploy/deploy.yaml todos/templates/todos/index.html
                         git commit -m 'Updated the deploy yaml for build ${BUILD_NUMBER}'
                         git remote -v
-                        git push https://${GITHUB_TOKEN}github.com/saireddysatishkumar/001-Project.git HEAD:main
+                        git push https://${GITHUB_TOKEN}@github.com/saireddysatishkumar/001-Project.git HEAD:main
                         '''                        
                     }
                 }
