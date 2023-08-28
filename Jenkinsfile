@@ -85,7 +85,7 @@ pipeline {
                         git commit -m "Updated the deploy yaml for build '${BUILD_NUMBER}'"
                         git remote -v
                         git push https://${GITHUB_TOKEN}@github.com/saireddysatishkumar/ArgoCD.git HEAD:main
-                        '''                        
+                    }    '''                        
                 }               
                 
             }
