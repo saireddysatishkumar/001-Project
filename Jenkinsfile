@@ -21,6 +21,10 @@ pipeline {
         }
 */
         stage('Build Docker'){
+            environment {
+            DOCKER_IMAGE = "saireddysatishkumar/todo-app:${BUILD_NUMBER}"
+            REGISTRY_CREDENTIALS = credentials('docker-cred')
+      }
             steps{
                 script{
                     sh '''
