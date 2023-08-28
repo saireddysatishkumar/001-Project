@@ -25,7 +25,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    docker build -t saireddysatishkumar/cicd-e2e:${BUILD_NUMBER} .
+                    docker build -t saireddysatishkumar/todo-app:${BUILD_NUMBER} .
                     '''
                 }
             }
@@ -59,11 +59,13 @@ pipeline {
                         git config user.name "satish kumar"
                         BUILD_NUMBER=${BUILD_NUMBER}
                         cp deploy/src/*yaml deploy/
+                        cp todos/templates/todos/index.html.template  todos/templates/todos/index.html
                         cat deploy.yaml
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy/deploy.yaml
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" todos/templates/todos/index.html
                         cat deploy.yaml
-                        git add deploy.yaml
-                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
+                        git add deploy.yaml todos/templates/todos/index.html
+                        git commit -m 'Updated the deploy yaml for build ${BUILD_NUMBER}'
                         git remote -v
                         git push https://github.com/saireddysatishkumar/001-Project.git HEAD:main
                         '''                        
