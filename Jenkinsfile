@@ -1,7 +1,11 @@
 pipeline {
     
-    agent any 
-    
+    agent {
+        node {
+            label 'python'
+        }
+    }
+
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
