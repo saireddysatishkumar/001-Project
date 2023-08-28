@@ -7,15 +7,15 @@ pipeline {
     }
     
     stages {
-        
+       /*  
         stage('Checkout'){
            steps {
-             /*   git credentialsId: 'xyz', */
+               git credentialsId: 'xyz', 
                 url: 'https://github.com/saireddysatishkumar/001-Project.git',
                 branch: 'main'
            }
         }
-
+*/
         stage('Build Docker'){
             steps{
                 script{
