@@ -66,7 +66,7 @@ pipeline {
                         cp todos/templates/todos/index.html.template  todos/templates/todos/index.html
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy/deploy.yaml
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" todos/templates/todos/index.html
-                        git add deploy.yaml todos/templates/todos/index.html
+                        git add deploy/deploy.yaml todos/templates/todos/index.html
                         git commit -m 'Updated the deploy yaml for build ${BUILD_NUMBER}'
                         git remote -v
                         git push https://github.com/saireddysatishkumar/001-Project.git HEAD:main
