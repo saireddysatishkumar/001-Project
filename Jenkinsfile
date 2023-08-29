@@ -54,7 +54,7 @@ pipeline {
                     branch: 'main'
                 }    
             }
-            stage('Update Build number and commit changes'){
+/*            stage('Update Build number and commit changes'){ */
                 steps {
                     withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                         sh '''
@@ -70,7 +70,7 @@ pipeline {
                         '''                        
                     }
                 }    
-            }
+        /*    } */
         }
 
         stage('Update deploy number in index.html & push to Repo'){
