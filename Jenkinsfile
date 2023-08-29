@@ -45,16 +45,35 @@ pipeline {
                 }
             }
         }
-     /*   /* enable it only if deployment manifests are in other repo.
-        stage('Checkout K8S manifest SCM'){
-            steps {
-                git credentialsId: 'f87a34a8-0e09-45e7-b9cf-6dc68feac670', 
-                url: 'https://github.com/saireddysatishkumar/001-Project.git',
-                branch: 'main'
+
+        stage('Checkout K8S manifest SCM and commit changes'){
+            stage('Checkout K8S manifests'){
+                steps {
+                    git credentialsId: 'github', 
+                    url: 'https://github.com/saireddysatishkumar/ArgoCD.git',
+                    branch: 'main'
+                }    
+            }
+            stage('Update Build number and commit changes'){
+                steps {
+                    withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                        sh '''
+                        git config user.email "satish.kumar@gmail.com"
+                        git config user.name "satish kumar"
+                        BUILD_NUMBER=${BUILD_NUMBER}
+                        cp deploy-manifests/dev/todo-app/src/*yaml deploy-manifests/dev/todo-app/
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy-manifests/dev/todo-app/1-deployment.yaml
+                        git add deploy-manifests/dev/todo-app/1-deployment.yaml
+                        git commit -m "Updated the deploy yaml for build '${BUILD_NUMBER}'"
+                        git remote -v
+                        git push https://${GITHUB_TOKEN}@github.com/saireddysatishkumar/ArgoCD.git HEAD:main
+                        '''                        
+                    }
+                }    
             }
         }
-       */  
-        stage('Update K8S manifest & push to Repo'){
+
+        stage('Update deploy number in index.html & push to Repo'){
             steps {
                 script{
                     withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
