@@ -47,13 +47,13 @@ pipeline {
         }
 
         stage('Checkout K8S manifest SCM and commit changes'){
-            stage('Checkout K8S manifests'){
+            /* stage('Checkout K8S manifests'){ */
                 steps {
                     git credentialsId: 'github', 
                     url: 'https://github.com/saireddysatishkumar/ArgoCD.git',
                     branch: 'main'
                 }    
-            }
+        /*     } */
 /*            stage('Update Build number and commit changes'){ */
                 steps {
                     withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
