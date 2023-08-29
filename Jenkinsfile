@@ -54,7 +54,7 @@ pipeline {
             }
         }
        */  
-        stage('Update K8S manifest & push to Repo'){
+        stage('Update version in app code & push to Repo'){
             steps {
                 script{
                     withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
