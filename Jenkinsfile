@@ -56,7 +56,8 @@ pipeline {
         /*     } */
 /*            stage('Update Build number and commit changes'){ */
                 steps {
-                    withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                    script{
+                        withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                         sh '''
                         git config user.email "satish.kumar@gmail.com"
                         git config user.name "satish kumar"
@@ -67,7 +68,8 @@ pipeline {
                         git commit -m "Updated the deploy yaml for build '${BUILD_NUMBER}'"
                         git remote -v
                         git push https://${GITHUB_TOKEN}@github.com/saireddysatishkumar/ArgoCD.git HEAD:main
-                        '''                        
+                        '''
+                        }                        
                     }
                 }    
         /*    } */
