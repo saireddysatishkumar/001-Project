@@ -75,8 +75,7 @@ pipeline {
                 }
             }
         }
-    }
-    stages {
+
         stage('Checkout K8S manifest SCM'){
             steps {
                 git credentialsId: 'github', 
