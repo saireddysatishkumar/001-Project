@@ -92,9 +92,9 @@ pipeline {
                         git config user.email "satish.kumar@gmail.com"
                         git config user.name "satish kumar"
                         BUILD_NUMBER=${BUILD_NUMBER}
-                        cp deploy-manifests/dev/todo-app/src/*yaml deploy-manifests/dev/todo-app/
-                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy-manifests/dev/todo-app/1-deployment.yaml
-                        git add deploy-manifests/dev/todo-app/1-deployment.yaml
+                        cp deploy-manifests/todo-app/src/*yaml deploy-manifests/todo-app/
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy-manifests/todo-app/1-deployment.yaml
+                        git add deploy-manifests/todo-app/1-deployment.yaml
                         git commit -m "Updated the deploy yaml for build '${BUILD_NUMBER}'"
                         git remote -v
                         git push https://${GITHUB_TOKEN}@github.com/saireddysatishkumar/ArgoCD.git HEAD:main
